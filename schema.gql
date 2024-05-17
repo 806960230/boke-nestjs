@@ -1,0 +1,74 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Page {
+  total: Int!
+  pageNum: Int!
+  pageSize: Int!
+}
+
+type Result {
+  code: Int!
+  message: String
+  data: String
+}
+
+type ArticleType {
+  id: String!
+
+  """标题"""
+  title: String!
+
+  """内容"""
+  content: String!
+
+  """发布日期"""
+  date: String!
+}
+
+type ArticleResult {
+  code: Int!
+  message: String!
+  data: ArticleType
+}
+
+type ArticleResults {
+  code: Int!
+  message: String!
+  data: [ArticleType!]
+  page: Page
+}
+
+type Query {
+  """使用 ID 查询文章"""
+  getArticle(id: String!): ArticleResult!
+  getArticles(page: PageInput!): ArticleResults!
+}
+
+input PageInput {
+  pageNum: Float!
+  pageSize: Float!
+}
+
+type Mutation {
+  """新增文章"""
+  createArticle(params: ArticleInput!): Boolean!
+
+  """更新文章"""
+  updateArticleInfo(id: String, params: ArticleInput!): Result!
+
+  """删除一个文章"""
+  del(id: String!): Boolean!
+}
+
+input ArticleInput {
+  """标题"""
+  title: String!
+
+  """内容"""
+  content: String!
+
+  """发布日期"""
+  date: String!
+}
