@@ -59,7 +59,7 @@ type Mutation {
   updateArticleInfo(id: String, params: ArticleInput!): Result!
 
   """删除一个文章"""
-  del(id: String!): Boolean!
+  del(id: String!): Result!
 }
 
 input ArticleInput {

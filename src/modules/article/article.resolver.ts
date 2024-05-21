@@ -73,9 +73,20 @@ export class ArticleResolver {
     }
   }
 
-  @Mutation(() => Boolean, { description: '删除一个文章' })
-  async del(@Args('id') id: string): Promise<boolean> {
-    return await this.articleService.del(id);
+  @Mutation(() => Result, { description: '删除一个文章' })
+  async del(@Args('id') id: string): Promise<Result> {
+    const res = await this.articleService.del(id);
+    if (res) {
+      return {
+        code: SUCCESS,
+        message: '删除成功',
+      };
+    } else {
+      return {
+        code: 400,
+        message: '删除失败',
+      };
+    }
   }
 
   // 查询多个文章列表
